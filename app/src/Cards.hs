@@ -88,3 +88,10 @@ getMaxCardTwo deck = let
   -- Does not run with ++ and no list "[]"
   result = (fst firstRun : fst secondRun : [], snd secondRun)
   in result
+
+getACard :: Deck -> (GameCard, Deck)
+getACard deck = let
+ firstOne = head deck
+ result = (firstOne, drop 1 deck)
+ in result
+
