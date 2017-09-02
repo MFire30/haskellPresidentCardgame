@@ -5,7 +5,7 @@ import Players
 import Menu
 
 -- Show the menu
-testMenu = getNewMenu
+--testMenu = getNewMenu
 
 -- Show deck from cards.hs
 testDeck = getNewDeck
