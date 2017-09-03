@@ -3,6 +3,7 @@ module Main where
 import Cards
 import Players
 import Menu
+import Stack
 
 -- Show the menu
 --testMenu = getNewMenu
