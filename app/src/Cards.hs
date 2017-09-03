@@ -1,9 +1,13 @@
 module Cards (
   getNewDeck,
+  getMaxCard,
+  getMaxCardTwo,
   GameCard,
   Deck
 )
 where
+
+import Data.List
 
 -- Uses deriving() for printing, comparison and ordenation
 data CardValues = Two | Three | Four | Five | Six | Seven
@@ -59,3 +63,35 @@ getNewDeck = [GameCard val s | val <- [Two .. A], s <- [Club .. Spade]]
 -- Defining a better way to show the Deck
 printCard :: GameCard -> String
 printCard (GameCard {value = a, suit = b}) = show a ++ "_" ++ show b
+
+-- Get the index for the higher card on the deck
+getMaxCardIndex :: Deck -> Int
+getMaxCardIndex deck = head (elemIndices (maximum deck) deck)
+
+-- Removes the card and puts on a tuple the rest
+-- Input: Deck
+-- Output: Tuple (MaxCard, DeckWithOutMaxCard)
+getMaxCard :: Deck -> (GameCard, Deck)
+getMaxCard deck = let
+  index = getMaxCardIndex deck
+  maxCard = deck !! index
+  splitDeck = splitAt index deck
+  remainingDeck = fst splitDeck ++ (drop 1 (snd splitDeck))
+  result = (maxCard, remainingDeck)
+  in result
+
+-- Same ideia as getMaxCard, but taking 2 cards
+getMaxCardTwo :: Deck -> (Deck, Deck)
+getMaxCardTwo deck = let
+  firstRun = getMaxCard deck
+  secondRun = getMaxCard (snd firstRun)
+  -- Does not run with ++ and no list "[]"
+  result = (fst firstRun : fst secondRun : [], snd secondRun)
+  in result
+
+getACard :: Deck -> (GameCard, Deck)
+getACard deck = let
+ firstOne = head deck
+ result = (firstOne, drop 1 deck)
+ in result
+
