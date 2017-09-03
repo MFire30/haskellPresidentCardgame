@@ -2,7 +2,8 @@ module CardManipulation (
   getMaxCard,
   getMaxCardTwo,
   getACard,
-  parseCard
+  parseCard,
+  getCardFromDeck
 ) where
 
 import Cards
@@ -19,9 +20,22 @@ parseCard cardText = let
   newCard = createCard splitTuple
   in newCard
 
+-- This functions looks for a card in a deck and returns its position
+getCardIndex :: GameCard -> Deck -> Int
+getCardIndex card deck = head (elemIndices card deck)
+
 -- Get the index for the higher card on the deck
 getMaxCardIndex :: Deck -> Int
 getMaxCardIndex deck = head (elemIndices (maximum deck) deck)
+
+-- This function takes the card input and removes it from a deck
+-- Input: card, deck
+-- Output: Tuple (Found card, New deck)
+getCardFromDeck :: GameCard -> Deck -> (GameCard, Deck)
+getCardFromDeck card deck = let
+  newList = [item | item <- deck, item /= card]
+  foundCard = filter (==card) deck
+  in (head foundCard, newList)
 
 -- Removes the card and puts on a tuple the rest
 -- Input: Deck
@@ -45,6 +59,8 @@ getMaxCardTwo deck = let
   in result
 
 -- This function gets the first card in the deck and retuns a tuple
+-- getACard :: Deck -> (GameCard, Deck)
+-- getACard deck@(x:xs) = (x, xs)
 -- Tuple: (Card, DeckWithoutTheCard)
 getACard :: Deck -> (GameCard, Deck)
 getACard deck = let
