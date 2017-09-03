@@ -4,6 +4,7 @@ import Cards
 import Players
 import Menu
 import Stack
+import CardManipulation
 
 -- Show the menu
 --testMenu = getNewMenu
