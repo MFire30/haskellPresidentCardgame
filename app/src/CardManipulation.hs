@@ -3,7 +3,8 @@ module CardManipulation (
   getMaxCardTwo,
   getACard,
   parseCard,
-  getCardFromDeck
+  getCardFromDeck,
+  getElegibleCards
 ) where
 
 import Cards
@@ -67,3 +68,8 @@ getACard deck = let
  firstOne = head deck
  result = (firstOne, drop 1 deck)
  in result
+
+getElegibleCards :: GameCard -> Deck -> Deck
+getElegibleCards card deck = let
+ elegibleCards = filter (>card) deck
+ in elegibleCards
