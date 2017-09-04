@@ -17,6 +17,9 @@ module DataModels(
 data Queue a = Queue [a]
   deriving(Show)
 
+data Stack a = Stack [a]
+  deriving(Show)
+
 createQueue :: [a] -> Queue a
 createQueue item = Queue item
 
