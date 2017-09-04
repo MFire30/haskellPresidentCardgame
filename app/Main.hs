@@ -1,20 +1,20 @@
 module Main where
 
 import Cards
+import CardManipulation
 import Players
+import PlayerManipulation
 import Menu
 import Stack
-import CardManipulation
+import DataModels
 
--- Show the menu
---testMenu = getNewMenu
+-- Data for testing
+p1 = createPlayer "P1" []
+p2 = createPlayer "P2" []
+p3 = createPlayer "P3" []
+p4 = createPlayer "P4" []
+p5 = createPlayer "P5" []
 
--- Show deck from cards.hs
-testDeck = getNewDeck
-
--- Creates a simple User
-testDeck10 = take 10 getNewDeck
-testUser = createPlayer "Tester" testDeck10
-
+playerQueue = createQueue [p1, p2, p3, p4, p5]
 
 main = putStrLn "Game Started"
