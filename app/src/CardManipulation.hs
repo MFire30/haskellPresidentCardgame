@@ -4,7 +4,8 @@ module CardManipulation (
   getACard,
   parseCard,
   getCardFromDeck,
-  getElegibleCards
+  getElegibleCards,
+  isCardInDeck
 ) where
 
 import Cards
@@ -20,6 +21,10 @@ parseCard cardText = let
     _ -> splitAt 0 "ERROR"
   newCard = createCard splitTuple
   in newCard
+
+-- This function checks if a card is in a deck
+isCardInDeck :: GameCard -> Deck -> Bool
+isCardInDeck card deck = elem card deck
 
 -- This functions looks for a card in a deck and returns its position
 getCardIndex :: GameCard -> Deck -> Int

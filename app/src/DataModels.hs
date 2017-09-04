@@ -36,13 +36,13 @@ queuePop (Queue items) = (head items, Queue (tail items))
 queueSize :: Queue a -> Int
 queueSize (Queue x) = length x
 
-createStack :: [a] -> Stack a
-createStack item = Stack item
-
 getQueueList :: Queue a -> [a]
 getQueueList (Queue x) = x
 
 -- ------------ Stack Operations --------------------
+createStack :: [a] -> Stack a
+createStack item = Stack item
+
 stackPush :: a -> Stack a -> Stack a
 stackPush item (Stack items) = Stack ([item] ++ items)
 

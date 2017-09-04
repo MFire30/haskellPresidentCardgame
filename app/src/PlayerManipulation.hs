@@ -2,7 +2,8 @@ module PlayerManipulation(
   createPlayerQueue,
   giveCardsToPlayers,
   calculatePlayerPos,
-  calculatePosList
+  calculatePosList,
+  getCardFromPlayer
 ) where
 
 import Cards
@@ -12,6 +13,19 @@ import DataModels
 
 createPlayerQueue :: Player -> Queue Player
 createPlayerQueue player = createQueue [player]
+
+-- Function checks for a card in player and return a new player without the cardText
+getCardFromPlayer :: GameCard -> Player -> Player
+getCardFromPlayer card player
+  | (isCardInDeck card playerDeck) = let
+    cardTuple = getCardFromDeck card playerDeck
+    newPlayer = createPlayer playerName (snd cardTuple)
+    result = newPlayer
+    in result
+  | otherwise = player
+  where
+    playerDeck = getPlayerDeck player
+    playerName = getPlayerName player
 
 -- Given a queue of players, this function gives a card to a player, recursively
 -- Stop condition = Empty deck
