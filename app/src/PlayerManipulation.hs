@@ -1,6 +1,8 @@
 module PlayerManipulation(
   createPlayerQueue,
-  giveCardsToPlayers
+  giveCardsToPlayers,
+  calculatePlayerPos,
+  calculatePosList
 ) where
 
 import Cards
@@ -36,3 +38,25 @@ giveCardsToPlayers players deck = let
   newQueue = queuePush newPlayer oldQueue
   result = giveCardsToPlayers newQueue remainingDeck
   in result
+
+-- This function calculates the player position result in the end of the game
+-- Input: Queue Length, Player Index
+-- Output: A PlayerPosition
+calculatePlayerPos :: Int -> Int -> PlayerPosition
+calculatePlayerPos queueLen playerIndex
+  | (playerIndex == maxIndx) = createPos "SM"
+  | (playerIndex == maxIndx - 1) = createPos "SC"
+  | (playerIndex >= 2) && (playerIndex < maxIndx -1) = createPos "PR"
+  | (playerIndex == 1) = createPos "VP"
+  | (playerIndex == 0) = createPos "P"
+  where maxIndx = queueLen - 1
+
+calculatePosList :: Queue Player -> Queue Player
+calculatePosList players = let
+  itensList = getQueueList players
+  listLen = length itensList
+  indexes = [0..listLen-1]
+
+  positions = [calculatePlayerPos listLen y | y <- indexes]
+  newPlayers = [givePlayerPos (itensList !! y) (positions !! y)| y <- indexes]
+  in createQueue newPlayers

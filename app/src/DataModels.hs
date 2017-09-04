@@ -8,7 +8,8 @@ module DataModels(
   queuePop,
   stackPop,
   queueSize,
-  stackSize
+  stackSize,
+  getQueueList
 ) where
 
 -- Defining a generic queue data structure
@@ -20,6 +21,7 @@ data Queue a = Queue [a]
 data Stack a = Stack [a]
   deriving(Show)
 
+  -- ------------ Queue Operations --------------------
 createQueue :: [a] -> Queue a
 createQueue item = Queue item
 
@@ -37,6 +39,10 @@ queueSize (Queue x) = length x
 createStack :: [a] -> Stack a
 createStack item = Stack item
 
+getQueueList :: Queue a -> [a]
+getQueueList (Queue x) = x
+
+-- ------------ Stack Operations --------------------
 stackPush :: a -> Stack a -> Stack a
 stackPush item (Stack items) = Stack ([item] ++ items)
 

@@ -3,6 +3,8 @@ module Players (
   getPlayerDeck,
   getPlayerName,
   getPlayerPos,
+  givePlayerPos,
+  createPos,
   Player,
   PlayerPosition
 ) where
@@ -20,6 +22,20 @@ data Player = Player {name :: String, userDeck :: Deck, position :: PlayerPositi
 
 createPlayer :: String -> Deck -> Player
 createPlayer nam dec = Player {name = nam, userDeck = dec, position = Person}
+
+givePlayerPos :: Player -> PlayerPosition -> Player
+givePlayerPos player pos = Player {name = name player, userDeck = userDeck player,
+  position = pos}
+
+-- This function is a gambiarra
+-- Parses a PlayerPosition
+createPos :: String -> PlayerPosition
+createPos s = case s of
+  "SM" -> ScumMaster
+  "SC" -> Scum
+  "PR" -> Person
+  "VP" -> VicePresident
+  "P" -> President
 
 -- Get methods
 getPlayerDeck :: Player -> Deck
